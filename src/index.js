@@ -1,4 +1,5 @@
 import decreator from 'decreator';
+import isAsync from './isAsync';
 
 export default decreator((target, key, descriptor, options) => {
 	let {
@@ -12,17 +13,31 @@ export default decreator((target, key, descriptor, options) => {
 
 	const method = target[key];
 
-	Object.defineProperty(target, key, {
-		value: function () {
-			try {
-				return method(...arguments);
-			} catch (error) {
-				if (handler) {
-					handler(error);
+	if (isAsync(method)) {
+		Object.defineProperty(target, key, {
+			value: async function () {
+				try {
+					return await method(...arguments);
+				} catch (error) {
+					if (handler) {
+						handler(error);
+					}
 				}
 			}
-		}
-	});
+		});
+	} else {
+		Object.defineProperty(target, key, {
+			value: function () {
+				try {
+					return method(...arguments);
+				} catch (error) {
+					if (handler) {
+						handler(error);
+					}
+				}
+			}
+		});
+	}
 
 	return target;
 });
