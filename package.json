@@ -1,6 +1,6 @@
 {
   "name": "exceptionable",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "decorator that allows you to swallow exceptions",
   "main": "dist/index.js",
   "scripts": {

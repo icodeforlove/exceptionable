@@ -4,7 +4,8 @@ export default func => {
 	return !!(
 		// native
 		string.match(/^async /) ||
+
 		// babel
-		string.match(/return _ref\.apply/)
+		string.match(/return _ref[^\.]*\.apply/)
 	);
 };
