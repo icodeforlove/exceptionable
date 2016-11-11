@@ -1,6 +1,10 @@
 import exceptionable from '../dist/index';
 
 class Example {
+	constructor() {
+		this.scope = 'decorated';
+	}
+
 	@exceptionable({verbose: false})
 	static methodWithoutLogging () {
 		throw new Error('Example');
@@ -9,6 +13,16 @@ class Example {
 	@exceptionable({verbose: false})
 	static async methodAsyncWithoutLogging () {
 		throw new Error('Example');
+	}
+
+	@exceptionable({verbose: false})
+	methodWithScope () {
+		return this.scope;
+	}
+
+	@exceptionable({verbose: false})
+	async methodAsyncWithScope () {
+		return this.scope;
 	}
 }
 
@@ -22,6 +36,12 @@ describe('Instance Tests', () => {
 		} catch (error) {}
 
 		expect(swallowed).toBe(true);
+	});
+
+	it('can retain scope', async () => {
+		const example = new Example();
+		expect(example.methodWithScope()).toBe('decorated');
+		expect(await example.methodAsyncWithScope()).toBe('decorated');
 	});
 
 	it('can swallow a async exception', async () => {

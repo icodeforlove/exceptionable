@@ -17,10 +17,10 @@ export default decreator((target, key, descriptor, options) => {
 		Object.defineProperty(target, key, {
 			value: async function () {
 				try {
-					return await method(...arguments);
+					return await method.apply(this, ...arguments);
 				} catch (error) {
 					if (handler) {
-						handler(error);
+						handler.call(this, error);
 					}
 				}
 			}
@@ -29,10 +29,10 @@ export default decreator((target, key, descriptor, options) => {
 		Object.defineProperty(target, key, {
 			value: function () {
 				try {
-					return method(...arguments);
+					return method.apply(this, ...arguments);
 				} catch (error) {
 					if (handler) {
-						handler(error);
+						handler.call(this, error);
 					}
 				}
 			}
