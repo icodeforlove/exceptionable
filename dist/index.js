@@ -50,7 +50,7 @@ exports.default = (0, _decreator2.default)(function (target, key, descriptor, op
 								case 0:
 									_context.prev = 0;
 									_context.next = 3;
-									return method.apply.apply(method, [this].concat(Array.prototype.slice.call(_args)));
+									return method.apply(this, _args);
 
 								case 3:
 									return _context.abrupt('return', _context.sent);
@@ -82,7 +82,7 @@ exports.default = (0, _decreator2.default)(function (target, key, descriptor, op
 		(0, _defineProperty2.default)(target, key, {
 			value: function value() {
 				try {
-					return method.apply.apply(method, [this].concat(Array.prototype.slice.call(arguments)));
+					return method.apply(this, arguments);
 				} catch (error) {
 					if (handler) {
 						handler.call(this, error);

@@ -21,6 +21,11 @@ class Example {
 	}
 
 	@exceptionable({verbose: false})
+	static methodWithArgs (foo, bar) {
+		return foo + bar;
+	}
+
+	@exceptionable({verbose: false})
 	async methodAsyncWithScope () {
 		return this.scope;
 	}
@@ -36,6 +41,10 @@ describe('Instance Tests', () => {
 		} catch (error) {}
 
 		expect(swallowed).toBe(true);
+	});
+
+	it('does not break args', () => {
+		expect(Example.methodWithArgs('foo', 'bar')).toBe('foobar');
 	});
 
 	it('can retain scope', async () => {
