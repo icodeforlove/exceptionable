@@ -1,6 +1,6 @@
 {
   "name": "exceptionable",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "decorator that allows you to swallow exceptions",
   "main": "dist/index.js",
   "scripts": {
@@ -35,6 +35,7 @@
     "jasmine-node": "^1.14.5"
   },
   "dependencies": {
-    "decreator": "0.0.0"
+    "decreator": "0.0.0",
+    "string-saw": "0.0.26"
   }
 }
